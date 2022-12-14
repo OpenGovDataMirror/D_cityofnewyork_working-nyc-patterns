@@ -1,0 +1,54 @@
+/**
+ * Layouts
+ */
+
+// Dependencies
+@use 'config/layouts';
+@use 'config/media';
+
+// Declarations
+
+// Layouts that include media queries
+.wrap, .page-wrap {
+  @include layouts.wrap()
+}
+
+.wrap-start, .page-wrap-start {
+  @include layouts.wrap-start()
+}
+
+.wrap-end, .page-wrap-end {
+  @include layouts.wrap-end()
+}
+
+.wrap-auto, .page-wrap-auto {
+  @include layouts.auto();
+  @include layouts.wrap()
+}
+
+@include layouts.map();
+
+// Layouts that do not include Media queries
+@include media.screens-and-min-width() using ($variant) {
+  @include layouts.page-min-selector($variant);
+  @include layouts.page-max-selector($variant);
+  @include layouts.page-min-max-selector($variant);
+
+  // @include layouts.rows-selector($variant);
+  // @include layouts.rows-gutter-selector($variant);
+
+  // @include layouts.sidebar-selector($variant);
+  // @include layouts.sidebar-small-selector($variant);
+  // @include layouts.sidebar-gutter-selector($variant);
+  // @include layouts.sidebar-small-gutter-selector($variant);
+  @include layouts.content-selector($variant);
+  // @include layouts.topbar-selector($variant);
+}
+
+.print {
+  @include layouts.print()
+}
+
+@media print {
+  @include layouts.print()
+}

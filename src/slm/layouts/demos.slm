@@ -1,0 +1,69 @@
+doctype html
+html lang='en'
+  head
+    meta charset='utf-8'
+    meta http-equiv='X-UA-Compatible' content='IE=edge'
+    meta name='viewport' content='width=device-width, initial-scale=1'
+
+    link rel='icon' type='image/x-icon' href='${this.baseUrl}/svg/favicon.svg'
+
+    link rel='stylesheet' href='${this.baseUrl}/styles/site-default.css'
+
+    - if (this.title != 'Working NYC')
+      title ${this.title} | Working NYC
+    - else
+      title ${this.title}
+
+    = content('head')
+
+  body class='color bg-scale-2 p-body'
+    / div class='relative z-10 shadow-up tablet:shadow-none'
+    - navigation = {class: 'o-navigation-fixed'}
+    - mobileMenu = {class: 'o-menu-fixed hidden', tabindex: '-1', ariaHidden: 'true'}
+    - search = {class: 'o-search-fixed hidden', tabindex: '-1', ariaHidden: 'true'}
+    - textController = {class: 'o-text-controller-fixed hidden', tabindex: '-1', ariaHidden: 'true'}
+    - footer = {role: 'contentinfo'}
+
+    = partial('/objects/navigation/navigation.slm')
+    = partial('/objects/menu/menu.slm')
+    / = partial('/objects/search/search.slm')
+    = partial('/objects/text-controller/text-controller.slm')
+
+    = content('content')
+
+    = partial('/objects/footer/footer.slm')
+
+    - navigation = {}
+    - mobileMenu = {}
+    - search = {}
+    - textController = {}
+    - footer = {}
+
+    script src='${this.baseUrl}/scripts/polyfills.js'
+    script src='${this.baseUrl}/scripts/main.js'
+
+    javascript:
+      var patterns = new WorkingNyc();
+
+      patterns.accordion();
+      patterns.dialog();
+      patterns.direction();
+      patterns.copy();
+      patterns.icons('${this.baseUrl}/svg/icons.svg');
+      patterns.icons('${this.baseUrl}/svg/feather.svg');
+      patterns.menu();
+      patterns.newsletter('${this.baseUrl}/demos/newsletter');
+      patterns.newsletterForm();
+      patterns.search();
+      patterns.setObjectHeights();
+      patterns.themes();
+      patterns.toggle();
+      patterns.webShare();
+      patterns.validateAndQuery();
+
+    = content('script');
+
+    / The reload script. This should not be compile during production builds
+    / @source https://www.npmjs.com/package/reload
+    - if this.process.env.NODE_ENV !== 'production'
+      script src='/reload/reload.js'

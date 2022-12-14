@@ -1,0 +1,18 @@
+/**********
+ * Objects
+ **********/
+
+// Objects are elements with more robust styling requirements. They may include
+// Components and utilities within them. Examples include headers, footers,
+// modals, sliders, and charts. Not all Objects are required for each
+// application and some will require their own Objects. Object namespaces are
+// prefixed with 'o-'.
+
+@forward 'objects/banner/banner';
+@forward 'objects/header/header';
+@forward 'objects/footer/footer';
+@forward 'objects/menu/menu';
+@forward 'objects/navigation/navigation';
+@forward 'objects/newsletter/newsletter';
+@forward 'objects/search/search';
+@forward 'objects/text-controller/text-controller';

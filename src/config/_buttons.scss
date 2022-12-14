@@ -1,0 +1,176 @@
+//
+// Variables, Functions, and Mixins
+//
+
+// Dependencies
+@use 'config/direction';
+@use 'config/media';
+@use 'config/typography';
+@use 'config/links';
+@use 'config/icons';
+@use 'config/interaction';
+
+// Declarations
+@function get($token) {
+  @return #{var(--wnyc-button-#{$token})};
+}
+
+@mixin reset() {
+  @include links.base;
+
+  font-family: inherit;
+  font-size: inherit;
+  background: transparent;
+  border: none;
+  padding: 0;
+  overflow: visible;
+
+  &:disabled {
+    color: var(--wnyc-button-disabled-text);
+    opacity: 0.8;
+  }
+
+  &:not([disabled]):hover {
+    @include links.hover;
+  }
+
+  &:not([disabled]) {
+    cursor: pointer;
+  }
+
+  @include icons.spacing;
+
+  @include interaction.focus;
+}
+
+@mixin normal() {
+  @include typography.set('button');
+
+  padding: calc(calc(var(--wnyc-grid) * 2) - get('border-width')) calc(var(--wnyc-spacing-DEFAULT) - get('border-width'));
+  line-height: get('inner-size');
+
+  * {
+    pointer-events: none;
+  }
+}
+
+@mixin base() {
+  @include normal();
+
+  appearance: none;
+  background-color: transparent;
+
+  border: get('border-width') get('border-style') currentColor;
+  border-radius: get('radius');
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  text-decoration: none;
+
+  &:not([disabled]) {
+    cursor: pointer;
+  }
+
+  @include icons.spacing;
+}
+
+@mixin icon-toggle() {
+  &[aria-pressed='false'] {
+    .icon {
+      display: inline-block;
+    }
+
+    .icon-pressed {
+      display: none;
+    }
+  }
+
+  &[aria-pressed='true'] {
+    .icon {
+      display: none;
+    }
+
+    .icon-pressed {
+      display: inline-block;
+    }
+  }
+}
+
+@mixin next() {
+  @if direction.$direction == 'ltr' {
+    > [class*='icon']:first-child {
+      display: none
+    }
+  } @else {
+    > [class*='icon']:last-child {
+      display: none
+    }
+  }
+}
+
+@mixin previous() {
+  @if direction.$direction == 'ltr' {
+    > [class*='icon']:last-child {
+      display: none
+    }
+  } @else {
+    > [class*='icon']:first-child {
+      display: none
+    }
+  }
+}
+
+@mixin tag() {
+  font-size: var(--wnyc-fontSize-small);
+  padding: var(--wnyc-grid) calc(var(--wnyc-grid) * 2);
+  border-radius: get('radius-tag');
+}
+
+@mixin toggle() {
+  text-align: start;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  > [class*='icon'] {
+    @include media.screens-and-prefers-motion {
+      transition: transform var(--wnyc-animate-duration)
+    }
+  }
+
+  &.active {
+    > [class*='icon'] {
+      transform: rotate(-180deg)
+    }
+  }
+}
+
+@mixin small() {
+  font-size: var(--wnyc-fontSize-small);
+  padding: calc(var(--wnyc-grid) / 2) var(--wnyc-grid);
+}
+
+@mixin color($type) {
+  color: var(--wnyc-button-#{$type}-text);
+  background-color: var(--wnyc-button-#{$type}-background);
+  border-color: transparent;
+
+  &:visited {
+    color: var(--wnyc-button-#{$type}-text);
+    background-color: var(--wnyc-button-#{$type}-background);
+  }
+
+  &:hover:not([disabled]),
+  &:active:not([disabled]) {
+    color: var(--wnyc-button-#{$type}-text-hover);
+    background-color: var(--wnyc-button-#{$type}-background-hover);
+  }
+
+  &:disabled {
+    background-color: var(--wnyc-button-disabled-background);
+  }
+}

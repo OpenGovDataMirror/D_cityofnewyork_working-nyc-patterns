@@ -1,0 +1,15 @@
+/**
+ * Labels
+ */
+
+// Dependencies
+@use 'config/labels';
+
+// Declarations
+.label, legend, .legend {
+  @include labels.base
+}
+
+legend, .legend {
+  margin-bottom: labels.$margin-bottom
+}

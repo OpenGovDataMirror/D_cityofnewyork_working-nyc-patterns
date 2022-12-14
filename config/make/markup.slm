@@ -1,0 +1,11 @@
+/ {{ Pattern }}
+
+/ Defaults
+- this['{{ pattern }}'] = {}
+- this['{{ pattern }}'].id = this.createId()
+
+/ Inherit overrides
+- if (typeof {{ pattern }} !== 'undefined')
+  - this['{{ pattern }}'] = Object.assign(this['{{ pattern }}'], {{ pattern }});
+
+div class='{{ prefix }}{{ pattern }}'

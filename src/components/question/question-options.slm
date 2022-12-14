@@ -1,0 +1,31 @@
+/ Question
+
+/ Defaults
+- this.question = {}
+- this.question.id = this.createId()
+- this.question.label = 'Will you please select an option from the list below?'
+- this.question.options = [{label: 'Option 1', class: 'mb-0'}, {label: 'Option 2', class: 'mb-0'}, {label: 'Option 3', class: 'mb-0'}, {label: 'Option 4', class: 'mb-0'}]
+- this.question.tabindex = false
+- this.question.required = 'true'
+- this.question.ariaHidden = false
+
+/ Inherit overrides
+- if (typeof question !== 'undefined')
+  - this.question = Object.assign(this.question, question);
+  - this.question.id = (question.id) ? question.id : this.question.id
+
+/! { @fieldset  Checkbox and radio input groups should be grouped in fieldset tags }
+fieldset id='${this.question.id}' class='c-question' aria-hidden=this.question.ariaHidden
+  /! { @legend  Checkboxes and radio input groups should be labeled by legend tags }
+  legend class='c-question__label' tabindex=this.question.tabindex
+    = this.question.label
+
+  - if (this.question.description)
+    p = this.question.description
+
+  div class='c-question__container grid grid-cols-1 tablet:grid-cols-2 gap-2'
+    - input = this.question;
+    - input.class = false;
+    - input.ariaHidden = false;
+
+    = partial('/elements/inputs/inputs-options.slm');

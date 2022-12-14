@@ -1,0 +1,70 @@
+/**
+ * Buttons
+ */
+
+// Dependencies
+@use 'config/animate';
+@use 'config/buttons';
+@use 'config/dimensions';
+@use 'config/direction';
+@use 'config/grid';
+@use 'config/tokens' as *;
+@use 'config/typography';
+@use 'config/media';
+
+// Declarations
+button {
+  @include buttons.reset;
+}
+
+.btn, [class*='btn-'] {
+  @include buttons.base;
+  @include buttons.icon-toggle();
+}
+
+@mixin buttons($variant: '') {
+  .#{$variant}btn {
+    @include buttons.normal();
+  }
+
+  // Button Types
+
+  .#{$variant}btn-tag {
+    @include buttons.tag();
+  }
+
+  .#{$variant}btn-toggle {
+    @include buttons.toggle();
+  }
+
+  .#{$variant}btn-small {
+    @include buttons.small();
+  }
+}
+
+@include media.screens-and-min-width() using ($variant) {
+  @include buttons($variant);
+}
+
+@each $type in map-get(map-get($tokens, 'button'), 'variants') {
+  .btn-#{$type} {
+    @include buttons.color($type);
+  }
+
+  @include media.screens-and-prefers-scheme(light) using ($scheme) {
+    .#{$scheme}\:btn-#{$type} {
+      @include buttons.color($type);
+    }
+  }
+}
+
+.btn-next,
+.btn-previous {
+  &[class*='-next'] {
+    @include buttons.next;
+  }
+
+  &[class*='-previous'] {
+    @include buttons.previous;
+  }
+}

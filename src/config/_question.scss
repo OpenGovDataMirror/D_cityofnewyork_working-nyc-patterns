@@ -1,0 +1,51 @@
+//
+// Variables, Functions, and Mixins
+//
+
+// Dependencies
+@use 'config/grid' as *;
+@use 'config/forms';
+@use 'config/labels';
+@use 'config/dimensions';
+@use 'config/direction';
+@use 'config/typography';
+@use 'config/media';
+
+// Declarations
+@mixin base() {
+  @include typography.set('question');
+
+  margin-bottom: forms.$fieldset-margin-bottom;
+
+  @include typography.selector-body-elements() {
+    @include typography.set('question');
+  }
+}
+
+@mixin error() {
+  position: relative;
+
+  @include media.screen-and-min-width('tablet') {
+    &::before {
+      content: '';
+      position: absolute;
+
+      top: calc(var(--wnyc-grid) * -2);
+      bottom: calc(var(--wnyc-spacing-DEFAULT) * -1);
+
+      inset-inline-start: calc(calc(var(--wnyc-grid) * -2) - var(--wnyc-input-error-border-width));
+
+      border-inline-start: var(--wnyc-input-error-border-width) solid var(--wnyc-error);
+      display: block;
+      width: 0;
+    }
+  }
+}
+
+@mixin error-message() {
+  @include typography.set('small');
+
+  color: var(--wnyc-error);
+  margin-bottom: calc(var(--wnyc-grid) * 2);
+  width: 100%;
+}

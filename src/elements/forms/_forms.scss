@@ -1,0 +1,24 @@
+/**
+ * Forms
+ */
+
+// Dependencies
+@use 'config/forms';
+@use 'config/question';
+
+// Declarations
+fieldset, legend {
+  @include forms.fieldset-reset;
+}
+
+fieldset, .fieldset {
+  margin-bottom: forms.$fieldset-margin-bottom;
+}
+
+input, textarea, select, optgroup {
+  @include forms.element-reset;
+}
+
+[type='checkbox'], [type='radio'] {
+  display: inline;
+}

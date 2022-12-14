@@ -1,0 +1,109 @@
+/**
+ * Header
+ */
+
+// Dependencies
+@use 'sass:math';
+@use 'config/grid' as *;
+@use 'config/dimensions';
+@use 'config/direction';
+@use 'config/layouts';
+@use 'config/media';
+@use 'config/nav';
+@use 'config/typography';
+
+$icon-height: calc(var(--wnyc-spacing-DEFAULT) * 2);
+$icon-width: calc(var(--wnyc-spacing-DEFAULT) * 2);
+
+// Declarations
+.o-header {
+  @include layouts.wrap();
+
+  padding-top: calc(var(--wnyc-grid) * 4);
+  padding-bottom: calc(var(--wnyc-grid) * 4);
+
+  *:last-child {
+    margin-bottom: 0;
+  }
+
+  @include media.screen-and-min-width('tablet') {
+    align-items: flex-start;
+    display: flex;
+  }
+
+  @include media.screen-and-min-width('tablet') {
+    padding-top: calc(var(--wnyc-grid) * 7);
+    padding-bottom: calc(var(--wnyc-grid) * 9);
+  }
+
+  > div {
+    width: 100%
+  }
+}
+
+.o-header__icon {
+  margin-bottom: calc(var(--wnyc-spacing-DEFAULT) / 3);
+
+  @include media.screen-and-min-width('tablet') {
+    margin-inline-end: var(--wnyc-spacing-DEFAULT);
+    width: $icon-width;
+
+    .o-header__label {
+      display: none;
+    }
+  }
+}
+
+.o-header__svg {
+  width: $icon-width;
+  height: $icon-height;
+}
+
+.o-header__title {
+  @include typography.set('h3');
+
+  // margin-top: -12px;
+}
+
+.o-header__subtitle {
+  @include typography.set('h5');
+
+  margin-top: 0;
+  margin-bottom: var(--wnyc-typography-margin-bottom);
+}
+
+.o-header__supplementary {
+  @include typography.set('small');
+
+  margin-top: 0;
+  margin-bottom: var(--wnyc-typography-margin-bottom);
+}
+
+.o-header__breadcrumbs {
+  @include typography.set('small');
+
+  font-family: var(--wnyc-fontFamily-primary);
+
+  margin-top: 0;
+  margin-bottom: var(--wnyc-typography-margin-bottom);
+}
+
+.o-header__breadcrumbs-chevron {
+  width: calc(var(--wnyc-grid) * 2);
+  height: calc(var(--wnyc-grid) * 2);
+  vertical-align: middle;
+}
+
+.o-header__tags {
+  @include media.screen-and-min-width('desktop') {
+    margin-inline-start: calc(var(--wnyc-grid) * -2);
+  }
+}
+
+.o-header__utility {
+  @include typography.set('small');
+  @include nav.inline();
+
+  display: flex;
+  justify-content: end;
+}

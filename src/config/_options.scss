@@ -1,0 +1,72 @@
+//
+// Variables, Functions, and Mixins
+//
+
+// Dependencies
+@use 'config/typography';
+@use 'config/interaction';
+
+// Declarations
+@mixin base() {
+  color: var(--wnyc-option-text);
+  background-color: var(--wnyc-option-background);
+
+  @include typography.set('option');
+
+  line-height: var(--wnyc-option-inner-size);
+  text-decoration: none;
+
+  display: flex;
+  padding: calc(calc(var(--wnyc-grid) * 2) - var(--wnyc-option-border-width));
+  border: var(--wnyc-option-border-width) var(--wnyc-option-border-style);
+  border-color: transparent;
+  border-radius: var(--wnyc-option-radius);
+
+  cursor: pointer;
+
+  @include interaction.blurred();
+}
+
+@mixin hover() {
+  color: var(--wnyc-option-text-hover);
+  border-color: var(--wnyc-option-border-hover);
+  background-color: var(--wnyc-option-background-hover)
+}
+
+@mixin graphic() {
+  fill: transparent;
+  stroke: transparent;
+
+  stroke-width: var(--wnyc-option-stroke-width);
+  stroke-linecap: var(--wnyc-select-stroke-line);
+  stroke-linejoin: var(--wnyc-select-stroke-line);
+
+  width: var(--wnyc-option-inner-size);
+  height: var(--wnyc-option-inner-size);
+  margin-inline-end: var(--wnyc-grid);
+}
+
+@mixin focused() {
+  @include interaction.focused();
+}
+
+@mixin checked() {
+  color: var(--wnyc-option-text-checked);
+  background-color: var(--wnyc-option-background-checked);
+}
+
+@mixin graphic-checked() {
+  fill: currentColor;
+
+  // This is just a placeholder or default specification.
+  // Checked colors depend on definitions in config/colors.
+  stroke: black;
+}
+
+@mixin checkbox-graphic() {
+  stroke: var(--wnyc-option-graphic-checkbox);
+}
+
+@mixin checkbox-graphic-checked() {
+  stroke: var(--wnyc-option-graphic-checkbox-checked);
+}

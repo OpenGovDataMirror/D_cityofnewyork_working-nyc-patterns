@@ -1,0 +1,52 @@
+- this.title = 'Newsletter'
+- this.description = ''
+- this.url = this.baseUrl + '/demos/newsletter'
+
+/ Layout
+= extend('/slm/layouts/demos');
+
+/ Content blocks
+= content('head');
+  = mixin('head');
+
+= content('content');
+  div class='bg-scale-2'
+    main id='content' class='bg-scale-1'
+      div
+        div class='layout-content sticky top-0 bg-scale-1 z-10'
+          div class='c-utility'
+            a href='${this.baseUrl}/demos/index' class='mie-auto'
+              svg class='icon-wnyc-ui rtl:flip' aria-hidden='true'
+                use href='#feather-chevron-left'
+
+              span Home
+
+            a href='#' class='btn btn-small btn-primary' data-js='web-share' data-web-share='{"title": "${this.title}", "text": "${this.description}", "url": "${this.url}"}'
+              svg class='icon-wnyc-ui' aria-hidden='true'
+                use href='#feather-share-2'
+
+              span Share
+
+        div class='layout-content'
+          header class='o-header'
+            div
+              nav class='o-header__breadcrumbs'
+                a href='${this.baseUrl}/demos/index' Home
+
+                svg class='o-header__breadcrumbs-chevron icon-wnyc-ui rtl:flip' aria-hidden='true'
+                  use href='#feather-chevron-right'
+
+                b Newsletter
+
+              h1 class='o-header__title'
+                | Newsletter
+
+        section class='layout-content'
+          div class='wrap'
+            div class='pb-8 mb-8'
+              = partial('/objects/newsletter/newsletter-form')
+
+      = partial('/objects/feedback/feedback')
+
+= content('script');
+  / javascript:

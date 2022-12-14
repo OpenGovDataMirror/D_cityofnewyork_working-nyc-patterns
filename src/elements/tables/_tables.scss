@@ -1,0 +1,192 @@
+/**
+ * Tables
+ */
+
+// Dependencies
+@use 'config/grid' as *;
+@use 'config/dimensions';
+@use 'config/media';
+@use 'config/typography';
+
+// Declarations
+@mixin table($direction: start) {
+  @include typography.set('tables');
+
+  text-align: $direction;
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: var(--wnyc-spacing-DEFAULT);
+
+  thead {
+    tr {
+      background-color: none;
+    }
+  }
+
+  tbody {
+    tr {
+      &:nth-child(odd) {
+        background-color: var(--wnyc-table-odd)
+      }
+    }
+  }
+
+  th {
+    font-weight: bold;
+    vertical-align: top;
+  }
+
+  th, td {
+    padding: var(--wnyc-cell-padding)
+  }
+}
+
+@mixin table-headers-first-column {
+  border-collapse: separate;
+  border-spacing: 0;
+
+  th, td {
+    border-bottom: 2px solid;
+    border-inline-end: 2px solid;
+    border-color: var(--wnyc-table-odd);
+  }
+
+  td:last-of-type {
+    border-inline-end: none
+  }
+
+  tbody tr:last-of-type th,
+  tbody tr:last-of-type td {
+    border-bottom: none
+  }
+
+  thead th {
+    vertical-align: bottom;
+    background-color: var(--wnyc-table-even);
+    border-bottom-color: var(--wnyc-table-odd);
+  }
+
+  tbody {
+    tr:nth-child(even) th {
+      background-color: var(--wnyc-table-even);
+      border-inline-end-color: var(--wnyc-table-odd);
+    }
+
+    tr:nth-child(odd) th {
+      background-color: var(--wnyc-table-odd);
+    }
+  }
+
+  // Top Left Corner
+  thead > tr:first-of-type > th:first-of-type {
+    vertical-align: middle;
+    border-inline-end-color: var(--wnyc-table-odd);
+  }
+}
+
+@mixin table-headers-sticky {
+  thead th,
+  tbody th {
+    position: sticky
+  }
+
+  thead th {
+    top: 0;
+    z-index: 1;
+  }
+
+  tbody th,
+  thead > tr:first-of-type > th:first-of-type {
+    inset-inline-start: 0
+  }
+
+  // Top Left Corner
+  thead > tr:first-of-type > th:first-of-type {
+    top: 0;
+    inset-inline-start: 0;
+    z-index: 2;
+  }
+}
+
+/**
+ * Default Tables
+ */
+
+table {
+  @include table
+}
+
+@mixin tables($variant: '') {
+  .#{$variant}table {
+    @include table
+  }
+
+  .#{$variant}table-numeric {
+    @include table(end)
+  }
+
+  .#{$variant}table-headers-first-column {
+    @include table-headers-first-column
+  }
+
+  .#{$variant}table-headers-sticky {
+    @include table-headers-sticky;
+    @include table-headers-first-column
+  }
+
+  .#{$variant}table-headers-start th {
+    text-align: start
+  }
+
+  .#{$variant}table-headers-center th {
+    text-align: center
+  }
+
+  .#{$variant}table-headers-end th {
+    text-align: end
+  }
+
+  .#{$variant}table-headers-top th {
+    vertical-align: top
+  }
+
+  .#{$variant}table-headers-middle th {
+    vertical-align: middle
+  }
+
+  .#{$variant}table-headers-bottom th {
+    vertical-align: bottom
+  }
+
+  .#{$variant}table-body-start td {
+    text-align: start
+  }
+
+  .#{$variant}table-body-center td {
+    text-align: center
+  }
+
+  .#{$variant}table-body-end td {
+    text-align: end
+  }
+
+  .#{$variant}table-body-top td {
+    vertical-align: top
+  }
+
+  .#{$variant}table-body-middle td {
+    vertical-align: middle
+  }
+
+  .#{$variant}table-body-bottom td {
+    vertical-align: bottom
+  }
+
+  .#{$variant}border-spacing-0 {
+    border-spacing: 0;
+  }
+}
+
+@include media.screens-and-min-width() using ($variant) {
+  @include tables($variant);
+}

@@ -1,0 +1,132 @@
+/**
+ * Question
+ */
+
+// Dependencies
+@use 'config/grid' as *;
+@use 'config/direction';
+@use 'config/dimensions';
+@use 'config/inputs';
+@use 'config/labels';
+@use 'config/question';
+@use 'config/typography';
+
+// Declarations
+.c-question {
+  @include question.base;
+}
+
+.c-question__container {
+  margin-top: var(--wnyc-grid);
+
+  &.error {
+    @include question.error;
+  }
+
+  .error-message {
+    @include question.error-message;
+  }
+}
+
+.c-question__label {
+  @include labels.base;
+}
+
+.c-question__info {
+  @include typography.set('small');
+
+  text-decoration: none;
+  vertical-align: middle;
+}
+
+.c-question-single {
+  .c-question__input {
+    color: var(--wnyc-input-text);
+    background: var(--wnyc-input-background);
+    border-color: var(--wnyc-input-border);
+
+    display: flex;
+    align-items: center;
+    align-items: stretch;
+    padding-inline-end: var(--wnyc-grid);
+
+    border: var(--wnyc-input-border-width) var(--wnyc-input-border-style);
+
+    // .error & {
+    //   border-color: $color-red
+    // }
+
+    // .success & {
+    //   border-color: $color-green-mid
+    // }
+
+    .input {
+      flex-grow: 1;
+      width: 100%;
+      min-width: 0px;
+
+      input {
+        width: 100%;
+        text-overflow: ellipsis;
+        padding-inline-end: 0;
+        min-width: 0;
+        border: none;
+      }
+    }
+  }
+}
+
+.c-question__button {
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex-shrink: 0;
+
+  [class*='btn-'] {
+    width: 100%;
+    height: 74%;
+  }
+
+  .processing & {
+    button {
+      opacity: 0;
+      pointer-events: none
+    }
+  }
+
+  .success & {
+    button {
+      display: none
+    }
+
+    &::after {
+      display: none
+    }
+  }
+}
+
+.c-question__success {
+  @include typography.set('small');
+
+  font-weight: bold;
+  display: none;
+
+  .success & {
+    display: block;
+    padding: calc(var(--wnyc-spacing-DEFAULT) * 0.75);
+  }
+}
+
+.c-question__spinner {
+  width: 1rem;
+  height: 1rem;
+  display: none;
+  justify-content: center;
+  align-items: center;
+
+  pointer-events: none;
+
+  .processing & {
+    display: flex
+  }
+}

@@ -1,0 +1,85 @@
+/**
+ * Web-share
+ */
+
+// Dependencies
+@use 'config/grid' as *;
+@use 'config/dimensions';
+@use 'config/direction';
+@use 'config/layouts';
+@use 'config/typography';
+@use 'config/media';
+
+// Declarations
+.c-web-share {
+  position: relative;
+  text-align: start;
+  pointer-events: auto;
+}
+
+.c-web-share__fallback {
+  @include typography.set('small');
+
+  background-color: var(--wnyc-card-body);
+  box-shadow: var(--wnyc-shadow-up);
+
+  position: absolute;
+  margin-top: var(--wnyc-grid);
+  margin-bottom: var(--wnyc-grid);
+
+  width: var(--wnyc-dimension-webshare-fallback);
+  max-width: calc(100vw - var(--wnyc-spacing-6));
+
+  @include media.screen-and-min-width('tablet') {
+    margin-top: calc(var(--wnyc-grid) * 2);
+    margin-bottom: calc(var(--wnyc-grid) * 2);
+  }
+}
+
+.c-web-share__fallback-body {
+  padding: calc(var(--wnyc-grid) * 2);
+
+  @include media.screen-and-min-width('tablet') {
+    padding: calc(var(--wnyc-grid) * 3);
+  }
+
+  > *:last-child {
+    margin-inline-end: 0;
+  }
+}
+
+.c-web-share__label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: var(--wnyc-grid);
+}
+
+.c-web-share__input {
+  width: 100%;
+  margin-bottom: calc(var(--wnyc-grid) * 2);
+
+  input {
+    padding: var(--wnyc-grid);
+  }
+}
+
+.c-web-share__items a,
+.c-web-share__items button {
+  // margin-bottom: var(--wnyc-grid);
+  white-space: nowrap;
+}
+
+.c-web-share__items {
+  @include layouts.rows();
+
+  gap: var(--wnyc-grid);
+
+  @include media.screen-and-min-width('mobile') {
+    @include layouts.three-columns();
+  }
+}
+
+.c-web-share__icon {
+  width: calc(var(--wnyc-grid) * 2);
+  height: calc(var(--wnyc-grid) * 2);
+}

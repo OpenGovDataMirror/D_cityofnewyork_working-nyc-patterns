@@ -1,0 +1,65 @@
+/**
+ * Footer
+ */
+
+@forward '@nycopportunity/pattern-attribution/src/attribution';
+
+// Dependencies
+@use 'config/grid' as *;
+@use 'config/dimensions';
+@use 'config/layouts';
+@use 'config/nav';
+@use 'config/media';
+@use 'config/typography';
+@use 'config/z' as indexes;
+
+// Declarations
+:root {
+  --o-attribution-section-borders: 1px solid var(--wnyc-scale-3);
+}
+
+.o-footer {
+  @include typography.set('small');
+  @include layouts.wrap();
+
+  padding-top: var(--wnyc-spacing-DEFAULT);
+  padding-bottom: var(--wnyc-spacing-DEFAULT);
+  width: 100%;
+
+  @include media.screen-and-min-width('tablet') {
+    padding-top: calc(var(--wnyc-grid) * 9);
+    padding-bottom: calc(var(--wnyc-grid) * 9);
+  }
+}
+
+.o-footer-fixed {
+  @include media.screen-and-max-width('tablet') {
+    position: fixed;
+    bottom: var(--wnyc-dimension-navigation-height-mobile);
+    z-index: indexes.get('footer')
+  }
+}
+
+.o-footer__divider {
+  border-bottom: 1px solid var(--wnyc-scale-3);
+}
+
+.o-footer__nav {
+  @include nav.block;
+
+  @include media.screen-and-min-width('tablet') {
+    @include nav.inline('', 'o-footer__item');
+
+    display: flex;
+    align-items: center;
+  }
+}
+
+.o-footer__item, .o-footer__item:not(.btn) {
+  @include typography.font-family('primary');
+
+  @include media.screen-and-min-width('tablet') {
+    display: inline-flex;
+    padding: 0;
+  }
+}

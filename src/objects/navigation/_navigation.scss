@@ -1,0 +1,82 @@
+/**
+ * Navigation
+ */
+
+@forward '@nycopportunity/pattern-navigation/src/navigation';
+
+// Dependencies
+@use 'config/media';
+@use 'config/typography';
+
+// Declarations
+:root {
+  --o-navigation-shadow: var(--wnyc-shadow-up);
+  --o-navigation-item-color: var(--wnyc-link);
+  --o-navigation-font-size: var(--wnyc-fontSize-small);
+  --o-navigation-item-font-weight: bold;
+  --o-navigation-item-text-decoration: underline;
+  --o-navigation-menu-item-font-size: inherit;
+}
+
+@include media.screen-and-min-width('tablet') {
+  :root {
+    --o-navigation-position: static;
+  }
+}
+
+.o-navigation__item:not(.btn),
+.o-navigation__menu-item:not(.btn) {
+  @include typography.font-family('primary');
+}
+
+body, .o-navigation-spacing {
+  padding-bottom: var(--wnyc-dimensions-navigation-height);
+}
+
+.o-navigation-spacing-bottom {
+  bottom: var(--wnyc-dimensions-navigation-height);
+}
+
+.o-navigation-spacing-top {
+  top: 0px;
+}
+
+.o-navigation-spacing-bottom {
+  bottom: var(--wnyc-dimensions-navigation-height);
+}
+
+.o-navigation-feedback-spacing-bottom {
+  bottom: calc(var(--wnyc-dimensions-navigation-height) + var(--wnyc-dimensions-feedback-height));
+}
+
+@include media.screen-and-min-width('tablet') {
+  body, .o-navigation-spacing {
+    padding-bottom: 0px;
+  }
+
+  .o-navigation-spacing-bottom {
+    bottom: 0px;
+  }
+
+  .o-navigation-spacing-top {
+    top: var(--wnyc-dimensions-navigation-height);
+  }
+
+  .o-navigation-feedback-spacing-bottom {
+    bottom: var(--wnyc-dimensions-feedback-height);
+  }
+}
+
+@include media.screen-and-min-width('desktop') {
+  .o-navigation-spacing-top {
+    top: 0px;
+  }
+
+  .o-navigation-spacing-bottom {
+    bottom: 0px;
+  }
+
+  .o-navigation-feedback-spacing-bottom {
+    bottom: var(--wnyc-dimensions-feedback-height);
+  }
+}

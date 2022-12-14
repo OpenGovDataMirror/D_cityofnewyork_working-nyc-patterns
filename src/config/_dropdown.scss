@@ -1,0 +1,36 @@
+//
+// Variables, Functions, and Mixins
+//
+
+// Dependencies
+@use 'config/dimensions';
+@use 'config/layouts';
+@use 'config/media';
+
+// Declarations
+@mixin base() {
+  overflow: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@mixin selector($variant: '', $type: '') {
+  .#{$variant}c-dropdown#{$type} {
+    @content;
+  }
+}
+
+@mixin max-height() {
+  max-height: var(--wnyc-dropdown-max-height);
+}
+
+@mixin min-height() {
+  min-height: var(--wnyc-dropdown-max-height);
+}
+
+@mixin inner() {
+  @include layouts.wrap();
+
+  padding-top: var(--wnyc-spacing-DEFAULT);
+  padding-bottom: var(--wnyc-spacing-DEFAULT);
+}

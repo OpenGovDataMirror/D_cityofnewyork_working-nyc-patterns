@@ -1,0 +1,22 @@
+/**
+ * Nav
+ */
+
+// Dependencies
+@use 'config/media';
+@use 'config/nav';
+
+// Declarations
+@mixin nav($variant: '') {
+  .nav, .#{$variant}nav-inline {
+    @include nav.inline($variant);
+  }
+
+  .#{$variant}nav-block {
+    @include nav.block($variant);
+  }
+}
+
+@include media.screens-and-min-width() using ($variant) {
+  @include nav($variant);
+}

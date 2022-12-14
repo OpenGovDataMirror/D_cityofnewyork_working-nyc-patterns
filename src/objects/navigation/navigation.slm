@@ -1,0 +1,46 @@
+/ Navigation
+
+/ Defaults
+- this.navigation = {}
+- this.navigation.id = this.createId()
+
+/ Inherit overrides
+- if (typeof navigation !== 'undefined')
+  - this.navigation = Object.assign(this.navigation, navigation);
+
+/! { @role        Use role='navigation' in production layouts. Identifies the nav as a major landmark }
+/! { @aria-label  Ensures a unique landmark }
+/! { @class       Add "o-navigation-fixed" in production layouts }
+nav role='navigation' aria-label='Navigation' data-js='navigation' class='o-navigation bg-scale-2 ${this.navigation.class}'
+  a href='${this.baseUrl}/demos/index' class='o-navigation__logo o-navigation__menu-item bg-scale-1 tablet:bg-transparent tablet:p-0'
+    span class='sr-only' Working N Y C
+
+    svg class='hidden tablet:inline icon-logo-standard-menu-item fill-text text-brand' aria-hidden='true'
+      use href='#logo-wnyc-standard'
+
+    svg class='tablet:hidden icon-logo-stacked-menu-item fill-text text-brand' aria-hidden='true'
+      use href='#logo-wnyc-stacked'
+
+  a class='o-navigation__item' href='${this.baseUrl}/demos/programs/index' Programs
+
+  a class='o-navigation__item' href='#' Opportunities
+
+  a class='o-navigation__item' href='${this.baseUrl}/demos/newsletter' Newsletter
+
+  button class='o-navigation__item' data-js='themes'
+    svg class='o-navigation__menu-icon icon-wnyc-ui'
+      use href='#feather-sun' data-js-themes='icon'
+
+    span class='o-navigation__menu-label' data-js-themes='label' Theme
+
+  button class='o-navigation__menu-item desktop:m-0' data-js='dialog' data-dialog='open' data-dialog-lock='true' aria-controls='aria-c-text-controller' aria-expanded='false'
+    svg class='o-navigation__menu-icon icon-wnyc-ui'
+      use href='#icon-wnyc-translate'
+
+    span class='o-navigation__menu-label' Translate
+
+  button class='o-navigation__menu-item desktop:hidden mie-0' data-js='menu' data-js-menu='open' aria-controls='aria-c-menu' aria-expanded='false'
+    svg class='o-navigation__menu-icon icon-wnyc-ui'
+      use href='#feather-menu'
+
+    span class='o-navigation__menu-label' Menu

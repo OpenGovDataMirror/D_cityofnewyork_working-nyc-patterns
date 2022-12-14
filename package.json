@@ -1,0 +1,85 @@
+{
+  "name": "@nycopportunity/working-patterns",
+  "nice": "Working NYC Patterns",
+  "org": "NYC Opportunity",
+  "author": "products@nycopportunity.nyc.gov",
+  "license": "GPL-3.0+",
+  "version": "0.0.1-60",
+  "description": "",
+  "homepage": "https://cityofnewyork.github.io/working-nyc-patterns",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cityofnewyork/working-nyc-patterns.git"
+  },
+  "keywords": [
+    "nycopportunity",
+    "working",
+    "patterns",
+    "nyc"
+  ],
+  "bugs": {
+    "url": "https://github.com/cityofnewyork/working-nyc-patterns/issues"
+  },
+  "cdn": {
+    "url": "https://cdn.jsdelivr.net/gh/cityofnewyork/working-nyc-patterns",
+    "source": "https://github.com/cityofnewyork/working-nyc-patterns",
+    "archive": "https://github.com/cityofnewyork/working-nyc-patterns/archive",
+    "release": "https://github.com/cityofnewyork/working-nyc-patterns/tree/v",
+    "npm": "https://www.npmjs.com/package/@nycopportunity/working-patterns",
+    "figma": "https://www.figma.com/file/CH7ZOCW55SgsDnsTj3UrTi/Patterns",
+    "styles": "/dist/styles/site-default.css",
+    "scripts": "/dist/scripts/main.js",
+    "svg": "/dist/svg/icons.svg",
+    "feather": "/dist/svg/feather.svg",
+    "fonts": "/dist/fonts",
+    "tailwindcss": "/dist/styles/tailwindcss.css",
+    "tailwindsass": "/dist/styles/_tailwindcss.scss",
+    "favicon": "/dist/svg/favicon.svg"
+  },
+  "src": {
+    "styles": "/src/scss/_imports.scss",
+    "scripts": "/src/js/main.js",
+    "polyfills": "/src/js/polyfills.js"
+  },
+  "instantiations": {
+    "scripts": "WorkingNyc"
+  },
+  "svgs": {
+    "primary": "icon-logo-primary"
+  },
+  "main": "npm start",
+  "scripts": {
+    "start": "npm run development && cross-env NODE_ENV=development cross-env PORT=7000 concurrently \"pttrn default -w -np\" \"pttrn serve -w\" -p \"none\"",
+    "development": "cross-env NODE_ENV=development pttrn default -np -nl",
+    "production": "cross-env NODE_ENV=production pttrn default -np -nl",
+    "default": "pttrn default -np -nl",
+    "predeploy": "npm run production",
+    "version": "npm run predeploy && git add .",
+    "prepublishOnly": "git push && git push --tags",
+    "publish": "npm run ghpages",
+    "ghpages": "cross-env NODE_ENV=production pttrn publish"
+  },
+  "devDependencies": {
+    "@hail2u/css-mqpacker": "^8.0.1",
+    "@nycopportunity/pttrn": "^1.4.4",
+    "@nycopportunity/pttrn-docs": "^1.0.7",
+    "@nycopportunity/pttrn-plugin-feather": "^1.0.2",
+    "@nycopportunity/pttrn-plugin-properties": "^1.1.0",
+    "@rollup/plugin-commonjs": "^17.1.0",
+    "@rollup/plugin-node-resolve": "^11.2.1",
+    "@rollup/plugin-replace": "^2.4.2",
+    "cssnano": "^5.0.10",
+    "deepmerge": "^4.2.2",
+    "postcss": "^8.3.11",
+    "tailwindcss-logical": "^2.0.0"
+  },
+  "dependencies": {
+    "@nycopportunity/pattern-attribution": "^1.0.3",
+    "@nycopportunity/pattern-menu": "^1.0.1",
+    "@nycopportunity/pattern-navigation": "^1.0.2",
+    "@nycopportunity/pttrn-scripts": "^1.0.12",
+    "feather-icons": "^4.28.0",
+    "js-cookie": "^3.0.1",
+    "whatwg-fetch": "^3.6.2"
+  }
+}

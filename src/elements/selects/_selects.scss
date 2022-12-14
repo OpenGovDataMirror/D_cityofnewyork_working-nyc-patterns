@@ -1,0 +1,28 @@
+/**
+ * Select
+ */
+
+// Dependencies
+// @use 'config/tokens' as *;
+@use 'config/grid' as *;
+@use 'config/selects';
+@use 'config/dimensions';
+// @use 'config/media';
+
+// Declarations
+.select {
+  color: var(--wnyc-input-text);
+  background: var(--wnyc-input-background);
+  border-color: var(--wnyc-input-border);
+
+  position: relative;
+  border-radius: var(--wnyc-select-radius);
+
+  select {
+    @include selects.base();
+  }
+}
+
+.select__graphic {
+  @include selects.graphic();
+}

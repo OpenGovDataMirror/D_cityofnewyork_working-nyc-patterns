@@ -1,0 +1,47 @@
+doctype html
+html lang='en' dir='ltr'
+  = content('head');
+
+  body class='color'
+    a class='sr-only' href='#main-content' Skip to main content
+
+    = partial('/slm/partials/header.slm');
+
+    aside#main-menu aria-labelledby='main-menu-control' aria-hidden='true' class='color-modal text-small hidden hidden:overflowFadeInUp animated'
+      div class='page-max py-4 animated'
+        div class='tablet:flex'
+          - tabindex = true;
+          = partial('/slm/partials/nav.slm');
+
+        div class='text-center'
+          button tabindex='-1' aria-controls='main-menu' aria-expanded='false' data-js='toggle' data-pa11y='disable'
+            / pa11y has trouble calculating the color contrast of this element so it is disabled
+            | Close Menu
+
+    main#main-content role='main' class='py-4'
+      article class='py-4 clearfix'
+        = content('content');
+        / = partial('../section/nav.slm');
+
+    - tabindex = false;
+    = partial('/slm/partials/footer.slm');
+
+    script src='scripts/polyfills.js'
+    script src='scripts/main.js'
+
+    javascript:
+      var patterns = new WorkingNyc();
+
+      patterns.direction();
+      patterns.icons();
+      patterns.icons('${this.baseUrl}/svg/feather.svg');
+      patterns.themes();
+      patterns.toggle();
+      patterns.copy();
+
+    = content('script');
+
+    / The reload script. This should not be compile during production builds
+    / @source https://www.npmjs.com/package/reload
+    - if this.process.env.NODE_ENV !== 'production'
+      script src='/reload/reload.js'

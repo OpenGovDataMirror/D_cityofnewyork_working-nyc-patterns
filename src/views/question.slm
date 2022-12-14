@@ -1,0 +1,40 @@
+- this.title = 'Question'
+
+/ Layout
+= extend('/slm/layouts/default')
+
+/ Partials
+= partial('/slm/partials/head.mixin.slm')
+= partial('/slm/partials/content-header.mixin.slm')
+= partial('/slm/section/section.mixin.slm')
+
+/ Content blocks
+= content('head')
+  = mixin('head')
+
+= content('header')
+  = mixin('header')
+
+= content('content')
+  = mixin('content-header')
+
+  form id='question-demo'
+    - question = {description: 'Answer to the best of your ability.'}
+    = mixin('section', '/components/question/question')
+
+    - question = {description: 'Feel free to select more than one option.'}
+    = mixin('section', '/components/question/question-options', {title: 'Multiple Choice Questions'})
+
+    - question = {label: 'Enter your email to sign up for our newsletter and stay up-to-date with careers, training, and events.', placeholder: 'Enter your email', type: 'email', name: 'EMAIL', required: 'true', class: 'c-question-single', button: 'Submit'}
+    = mixin('section', '/components/question/question', {title: 'Single Field Question', text: false})
+
+  = mixin('section', '/components/question/readme', {title: 'Validation', markup: false, demo: false})
+
+= content('script');
+  javascript:
+    patterns.validate('#question-demo', function(event) {
+      event.preventDefault();
+
+      return false;
+    });
+

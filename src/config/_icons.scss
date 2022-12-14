@@ -1,0 +1,118 @@
+//
+// Variables, Functions, and Mixins
+//
+
+// Dependencies
+@use 'config/tokens' as *;
+@use 'config/dimensions';
+
+$sizes: map-get($tokens, 'iconSize');
+
+// Declarations
+@mixin selector() {
+  svg[class*='icon'] {
+    @content;
+  }
+}
+
+@mixin base() {
+  overflow: visible !important;
+  max-width: 100%;
+  width: nth(map-get($sizes, 'default'), 1);
+  height: nth(map-get($sizes, 'default'), 2);
+}
+
+@mixin sizes($variant: '') {
+  @each $key, $var in $sizes {
+    .#{$variant}icon-#{$key} {
+      width: nth($var, 1) !important;
+      height: nth($var, 2) !important;
+    }
+  }
+}
+
+@mixin spacing() {
+  > [class*='icon'] {
+    width: 1rem;
+    height: 1rem
+  }
+
+  > [class*='icon']:first-child {
+    margin-inline-end: calc(var(--wnyc-grid) * 0.75);
+  }
+
+  > [class*='icon']:last-child {
+    margin-inline-start: calc(var(--wnyc-grid) * 0.75);
+  }
+}
+
+@mixin ui {
+  [class*='icon-wnyc-ui'] {
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+
+    circle {
+      fill: currentColor;
+    }
+  }
+}
+
+@mixin subway {
+  [class*='icon-subway'] {
+    color: $color-white;
+    font-size: 65%;
+    font-family: helvetica, arial, sans-serif;
+    font-weight: bold;
+    @include font-smooth();
+    padding: 1px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 9999px;
+    display: inline-flex;
+
+    width: var(--wnyc-spacing-DEFAULT);
+    height: var(--wnyc-spacing-DEFAULT);
+    min-width: var(--wnyc-spacing-DEFAULT);
+    min-height: var(--wnyc-spacing-DEFAULT);
+
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+
+    &.bg-broadway {
+      color: $color-black;
+    }
+  }
+
+  .icon-subway-express {
+    position: relative;
+    z-index: 1;
+
+    &[class*='bg-'] {
+      background-color: transparent !important;
+    }
+
+    &:before, &:after {
+      content: '';
+      border: 15px solid transparent;
+      width: 0;
+      height: 0;
+      position: absolute;
+      left: -3px;
+      z-index: -1;
+    }
+
+    &:before {
+      top: -18px;
+      border-bottom-color: inherit;
+    }
+
+    &:after {
+      bottom: -18px;
+      border-top-color: inherit;
+    }
+  }
+}

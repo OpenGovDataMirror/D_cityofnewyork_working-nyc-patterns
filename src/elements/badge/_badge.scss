@@ -1,0 +1,27 @@
+/**
+ * Badges
+ */
+
+// Dependencies
+// @use 'config/tokens' as *;
+
+// Declarations
+.badge {
+  font-size: var(--wnyc-badge-font-size);
+  font-weight: var(--wnyc-badge-font-weight);
+  line-height: var(--wnyc-badge-line-height);
+  text-transform: var(--wnyc-badge-text-transform);
+
+  color: var(--wnyc-badge-color);
+  background-color: var(--wnyc-badge-background);
+
+  border-radius: var(--wnyc-badge-radius);
+  display: inline-block;
+
+  padding: var(--wnyc-badge-padding);
+}
+
+.badge-small {
+  line-height: var(--wnyc-badge-small-line-height);
+  padding: var(--wnyc-badge-small-padding);
+}

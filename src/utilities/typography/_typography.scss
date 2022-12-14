@@ -1,0 +1,161 @@
+/**
+ * Typography
+ */
+
+@use 'config/grid' as *;
+@use 'config/direction';
+@use 'config/language';
+@use 'config/media';
+@use 'config/typography';
+
+html {
+  font-size: var(--wnyc-typography-small);
+
+  @if direction.$direction == 'rtl' {
+    direction: rtl;
+  }
+
+  @media screen and (min-width: media.get('small')) {
+    font-size: var(--wnyc-typography-mobile);
+  }
+
+  @include media.screen-and-min-width('tablet') {
+    font-size: var(--wnyc-typography-tablet);
+  }
+
+  @include media.screen-and-min-width('desktop') {
+    font-size: var(--wnyc-typography-desktop);
+  }
+}
+
+body {
+  @include typography.set('body');
+}
+
+h1, .h1 {
+  @include typography.set('h1');
+
+  // letter-spacing: 0.01em;
+}
+
+h2, .h2 {
+  @include typography.set('h2');
+
+  // letter-spacing: 0.01em;
+}
+
+h3, .h3 {
+  @include typography.set('h3');
+
+  // letter-spacing: 0.01em;
+}
+
+h4, .h4 {
+  @include typography.set('h4');
+
+  // letter-spacing: 0.01em;
+}
+
+h5, .h5 {
+  @include typography.set('h5');
+}
+
+h6, .h6 {
+  @include typography.set('h6');
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  margin-top: calc(var(--wnyc-typography-margin-bottom) * 2);
+  margin-bottom: var(--wnyc-typography-margin-bottom);
+
+  a:not(.btn) {
+    font-weight: inherit
+  }
+}
+
+small, .small {
+  @include typography.set('small');
+}
+
+blockquote, .blockquote {
+  @include typography.set('blockquote');
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: var(--wnyc-typography-margin-bottom);
+
+  @include media.screen-and-min-width('tablet') {
+    margin-inline-start: calc(var(--wnyc-grid) * -9);
+  }
+
+  p {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+
+    @include media.screen-and-min-width('tablet') {
+      padding-inline-start: calc(var(--wnyc-grid) * 9);
+    }
+  }
+
+  footer {
+    font-size: 65%;
+    font-weight: normal;
+    padding-left: calc(var(--wnyc-grid) * 4);
+  }
+
+  cite {
+    font-style: normal;
+  }
+
+  .blockquote__mark {
+    position: absolute;
+    display: none;
+
+    @include media.screen-and-min-width('tablet') {
+      display: block;
+    }
+  }
+}
+
+p, li {
+  @include typography.set('p');
+
+  a:not(.btn), b {
+    font-weight: var(--wnyc-fontWeight-bold, bold);
+  }
+}
+
+@include typography.selector-body-elements() {
+  margin-top: 0;
+  margin-bottom: var(--wnyc-typography-margin-bottom);
+}
+
+@include typography.selector-lists() {
+  padding-inline-start: var(--wnyc-typography-list-indent);
+  margin-bottom: calc(var(--wnyc-typography-margin-bottom) * 2);
+}
+
+// .font-primary {
+//   @if language.$language == '' {
+
+//   } @else {
+
+//   }
+// }
+
+// .font-secondary {
+//   @if language.$language == '' {
+
+//   } @else {
+
+//   }
+// }
+
+// @media print {
+//   html { }
+// }

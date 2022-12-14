@@ -1,0 +1,44 @@
+/ Mobile Menu
+
+/ Defaults
+- this.mobileMenu = {}
+- this.mobileMenu.id = this.createId()
+- this.mobileMenu.ariaHidden = false
+- this.mobileMenu.tabindex = false
+
+/ Inherit overrides
+- if (typeof mobileMenu !== 'undefined')
+  - this.mobileMenu = Object.assign(this.mobileMenu, mobileMenu);
+
+/! { @id     Identifies the Mobile Menu for toggling }
+/! { @class  Add "o-menu-fixed" in production layouts }
+aside#aria-c-menu class='o-menu ${this.mobileMenu.class}' aria-hidden=this.mobileMenu.ariaHidden
+  button class='flex items-center justify-self-end mb-auto' data-js='themes' tabindex=this.mobileMenu.tabindex
+    svg class='icon-wnyc-ui' tabindex=this.mobileMenu.tabindex
+      use href='#feather-sun' data-js-themes='icon'
+
+    span data-js-themes='label' Theme
+
+  div class='mb-auto'
+    /! { @aria-label  Ensures landmarks are unique }
+    nav class='o-menu__nav' aria-label='Menu'
+      /! { @tabindex  Add tabindex="-1" to insure focusable elements are not visible when parent is hidden }
+      a class='o-menu__nav-item' tabindex=this.mobileMenu.tabindex href='${this.baseUrl}/demos/index' Home
+
+      a class='o-menu__nav-item' tabindex=this.mobileMenu.tabindex href='${this.baseUrl}/demos/programs/index' Programs
+
+      a class='o-menu__nav-item' tabindex=this.mobileMenu.tabindex href='#' Opportunities
+
+      a class='o-menu__nav-item' tabindex=this.mobileMenu.tabindex href='${this.baseUrl}/demos/newsletter' Newsletter
+
+    /! { @data-js              "menu" Adds the toggling utility to close the menu }
+    /! { @data-js-menu  "close" indicates that this is the primary closing button for the menu. Focus will shift from the open button to the close button when the menu is opened. }
+    /! { @aria-controls        Targets the Mobile Menu ID for toggling }
+    /! { @aria-expanded        Indicates the toggled state of the target }
+    /! { @tabindex             Add tabindex="-1" to insure focusable elements are not visible when parent is hidden }
+    button class='o-menu__nav-item flex items-center' data-js='menu' data-js-menu='close' aria-controls='aria-c-menu' aria-expanded='${this.mobileMenu.ariaHidden ? 'false' : 'true' }' tabindex=this.mobileMenu.tabindex
+      /! { @tabindex  Add tabindex="-1" to insure focusable elements are not visible when parent is hidden }
+      svg aria-hidden='true' class='icon-wnyc-ui' tabindex=this.mobileMenu.tabindex
+        use href='#feather-x'
+
+      span Close

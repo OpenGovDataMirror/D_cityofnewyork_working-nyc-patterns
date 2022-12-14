@@ -1,0 +1,104 @@
+//
+// Variables, Functions, and Mixins
+//
+
+// Dependencies
+@use 'config/grid' as *;
+@use 'config/typography';
+@use 'config/media';
+@use 'config/direction';
+@use 'config/dimensions';
+
+// Declarations
+@mixin icon {
+  svg {
+    text-decoration: none;
+    pointer-events: none;
+  }
+
+  .icon {
+    margin-inline-end: $grid;
+    vertical-align: middle;
+    margin-top: -2px
+  }
+}
+
+@mixin inline($variant: '', $childClass: 'nav__item') {
+  list-style: none;
+
+  a:not(.btn) {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  a:not(.btn), button, .btn, .#{$childClass} {
+    display: inline-flex;
+    margin-inline-end: 1em;
+
+    &:first-child {
+      margin-inline-start: 0;
+    }
+
+    &:last-child {
+      margin-inline-end: 0;
+    }
+  }
+
+  .active {
+    font-weight: bold;
+  }
+
+  .text-start & a,
+  .text-start & button { // based on utilities/text/text
+    margin-left: 0;
+    margin-right: 1em;
+  }
+
+  .text-end & a,
+  .text-end & button { // based on utilities/text/text
+    margin-right: 0;
+    margin-left: 1em;
+  }
+
+  @include icon;
+}
+
+@mixin block($variant: '') {
+  list-style: none;
+  // margin: 0;
+  // padding: 0;
+
+  a:not(.btn) {
+    display: block;
+    padding-left: 0;
+    padding-right: 0;
+
+    padding-top: calc(var(--wnyc-grid) * 2);
+    padding-bottom: calc(var(--wnyc-grid) * 2);
+
+    @include media.screen-and-max-width('small') {
+      padding-top: var(--wnyc-grid);
+      padding-bottom: var(--wnyc-grid);
+    }
+  }
+
+  button, .btn {
+    display: flex;
+    margin-bottom: calc(var(--wnyc-grid) * 2);
+    width: 100%;
+
+    &:last-child {
+      margin-bottom: 0
+    }
+  }
+
+  .active {
+    font-weight: bold;
+  }
+
+  li {
+    margin-bottom: 0;
+  }
+
+  @include icon;
+}

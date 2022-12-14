@@ -1,0 +1,57 @@
+/**
+ * Options
+ */
+
+// Dependencies
+@use 'config/options';
+@use 'config/screen-readers';
+
+// Declarations
+.option {
+  display: inline-block;
+  margin-bottom: var(--wnyc-grid);
+
+  &:last-of-type {
+    margin-bottom: 0
+  }
+
+  > input {
+    @include screen-readers.only()
+  }
+
+  &:hover > .option__base {
+    @include options.hover();
+  }
+}
+
+.option__base {
+  @include options.base();
+}
+
+.option__graphic {
+  @include options.graphic()
+}
+
+input:focus + .option__base {
+  @include options.focused()
+}
+
+input:checked + .option__base {
+  @include options.checked();
+
+  > .option__graphic {
+    @include options.graphic-checked()
+  }
+}
+
+/**
+ * Checkbox Graphic
+ */
+
+input[type='checkbox'] + .option__base > .option__graphic {
+  @include options.checkbox-graphic();
+}
+
+input[type='checkbox']:checked + .option__base > .option__graphic {
+  @include options.checkbox-graphic-checked();
+}

@@ -1,0 +1,37 @@
+//
+// Variables, Functions, and Mixins
+//
+
+// Dependencies
+// @use 'config/tokens' as *;
+// @use 'config/grid' as *;
+// @use 'config/dimensions';
+// @use 'config/media';
+// @use 'config/typography';
+@use 'config/interaction';
+
+// Declarations
+@mixin base() {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: normal;
+  font-style: normal;
+
+  line-height: var(--wnyc-input-inner-size);
+  text-overflow: ellipsis;
+  padding: calc(calc(var(--wnyc-grid ) * 2) - var(--wnyc-input-border-width));
+  border: var(--wnyc-input-border-width) var(--wnyc-input-border-style);
+  border-color: inherit;
+  border-radius: var(--wnyc-input-radius);
+
+  @include interaction.focus();
+}
+
+@mixin icon() {
+  padding-inline-end: var(--wnyc-input-icon-padding);
+}
+
+@mixin currency-icon() {
+  font-size: var(--wnyc-input-currency-font-size);
+  font-weight: bold;
+}
